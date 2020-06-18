@@ -3,9 +3,6 @@
         <RootNamespace>YesSql.Provider</RootNamespace>
         <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
         <VersionPrefix>1.0.0</VersionPrefix>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\YesSql.Abstractions\YesSql.Abstractions.csproj" />
-    </ItemGroup>
 </Project>

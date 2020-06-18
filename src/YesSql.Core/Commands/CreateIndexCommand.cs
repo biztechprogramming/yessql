@@ -31,7 +31,7 @@ namespace YesSql.Commands
             var sql = Inserts(type, dialect);
             logger.LogTrace(sql);
             Index.Id = await connection.ExecuteScalarAsync<int>(sql, Index, transaction);
-
+            
 
             if (Index is MapIndex)
             {

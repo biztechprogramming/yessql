@@ -55,7 +55,7 @@ namespace YesSql.Sql
             FromSegments.Add(from);
         }
 
-        public bool HasPaging => _skip != null || _count != null;
+        public bool HasPaging => !string.IsNullOrWhiteSpace(_skip) || !string.IsNullOrWhiteSpace(_count);
 
         public void Skip(string skip)
         {
@@ -197,7 +197,7 @@ namespace YesSql.Sql
         {
             if (String.Equals(_clause, "SELECT", StringComparison.OrdinalIgnoreCase))
             {
-                if (_skip != null || _count != null)
+                if (!string.IsNullOrWhiteSpace(_skip) || !string.IsNullOrWhiteSpace(_count))
                 {
                     _dialect.Page(this, _skip, _count);
                 }

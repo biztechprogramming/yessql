@@ -7,8 +7,4 @@
     <ItemGroup>
         <PackageReference Include="MySqlConnector" Version="0.66.0" />
     </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\YesSql.Core\YesSql.Core.csproj" />
-        <ProjectReference Include="..\YesSql.Provider.Common\YesSql.Provider.Common.csproj" />
-    </ItemGroup>
 </Project>

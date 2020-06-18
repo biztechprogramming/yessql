@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "YesSql.Abstractions": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

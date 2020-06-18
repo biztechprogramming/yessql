@@ -100,20 +100,20 @@ namespace YesSql.Provider.SqlServer
 
         public override void Page(ISqlBuilder sqlBuilder, string offset, string limit)
         {
-            if (offset != null)
+            if (!string.IsNullOrWhiteSpace(offset))
             {
                 sqlBuilder.Trail(" OFFSET ");
                 sqlBuilder.Trail(offset);
                 sqlBuilder.Trail(" ROWS");
 
-                if (limit != null)
+                if (!string.IsNullOrWhiteSpace(limit))
                 {
                     sqlBuilder.Trail(" FETCH NEXT ");
                     sqlBuilder.Trail(limit);
                     sqlBuilder.Trail(" ROWS ONLY");
                 }
             }
-            else if (limit != null)
+            else if (!string.IsNullOrWhiteSpace(limit))
             {
                 // Insert LIMIT clause after the select with brackets for parameters
                 sqlBuilder.InsertSelector(" ");

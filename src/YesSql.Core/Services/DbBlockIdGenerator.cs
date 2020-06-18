@@ -43,9 +43,9 @@ namespace YesSql.Services
             _tablePrefix = store.Configuration.TablePrefix;
             _store = store;
 
-            SelectCommand = "SELECT " + _dialect.QuoteForColumnName("nextval") + " FROM " + _dialect.QuoteForTableName(_tablePrefix + TableName) + " WHERE " + _dialect.QuoteForTableName("dimension") + " = @dimension;";
-            UpdateCommand = "UPDATE " + _dialect.QuoteForTableName(_tablePrefix + TableName) + " SET " + _dialect.QuoteForColumnName("nextval") + "=@new WHERE " + _dialect.QuoteForColumnName("nextval") + " = @previous AND " + _dialect.QuoteForColumnName("dimension") + " = @dimension;";
-            InsertCommand = "INSERT INTO " + _dialect.QuoteForTableName(_tablePrefix + TableName) + " (" + _dialect.QuoteForColumnName("dimension") + ", " + _dialect.QuoteForColumnName("nextval") + ") VALUES(@dimension, @nextval);";
+            SelectCommand = "SELECT " + _dialect.QuoteForColumnName("nextval") + " FROM " + _dialect.QuoteForTableName(_tablePrefix + TableName) + " WHERE " + _dialect.QuoteForTableName("dimension") + " = :dimension;";
+            UpdateCommand = "UPDATE " + _dialect.QuoteForTableName(_tablePrefix + TableName) + " SET " + _dialect.QuoteForColumnName("nextval") + "=:new WHERE " + _dialect.QuoteForColumnName("nextval") + " = :previous AND " + _dialect.QuoteForColumnName("dimension") + " = :dimension;";
+            InsertCommand = "INSERT INTO " + _dialect.QuoteForTableName(_tablePrefix + TableName) + " (" + _dialect.QuoteForColumnName("dimension") + ", " + _dialect.QuoteForColumnName("nextval") + ") VALUES(:dimension, :nextval);";
 
             using (var connection = store.Configuration.ConnectionFactory.CreateConnection())
             {
@@ -120,7 +120,7 @@ namespace YesSql.Services
 
                             var selectDimension = selectCommand.CreateParameter();
                             selectDimension.Value = range.Collection;
-                            selectDimension.ParameterName = "@dimension";
+                            selectDimension.ParameterName = ":dimension";
                             selectCommand.Parameters.Add(selectDimension);
 
                             selectCommand.Transaction = transaction;
@@ -133,17 +133,17 @@ namespace YesSql.Services
 
                             var updateDimension = updateCommand.CreateParameter();
                             updateDimension.Value = range.Collection;
-                            updateDimension.ParameterName = "@dimension";
+                            updateDimension.ParameterName = ":dimension";
                             updateCommand.Parameters.Add(updateDimension);
 
                             var newValue = updateCommand.CreateParameter();
                             newValue.Value = nextval + _blockSize;
-                            newValue.ParameterName = "@new";
+                            newValue.ParameterName = ":new";
                             updateCommand.Parameters.Add(newValue);
 
                             var previousValue = updateCommand.CreateParameter();
                             previousValue.Value = nextval;
-                            previousValue.ParameterName = "@previous";
+                            previousValue.ParameterName = ":previous";
                             updateCommand.Parameters.Add(previousValue);
 
                             updateCommand.Transaction = transaction;
@@ -192,7 +192,7 @@ namespace YesSql.Services
 
                     var selectDimension = selectCommand.CreateParameter();
                     selectDimension.Value = collection;
-                    selectDimension.ParameterName = "@dimension";
+                    selectDimension.ParameterName = ":dimension";
                     selectCommand.Parameters.Add(selectDimension);
 
                     selectCommand.Transaction = transaction;
@@ -221,12 +221,12 @@ namespace YesSql.Services
 
                             var dimensionParameter = command.CreateParameter();
                             dimensionParameter.Value = collection;
-                            dimensionParameter.ParameterName = "@dimension";
+                            dimensionParameter.ParameterName = ":dimension";
                             command.Parameters.Add(dimensionParameter);
 
                             var nextValParameter = command.CreateParameter();
                             nextValParameter.Value = 1;
-                            nextValParameter.ParameterName = "@nextval";
+                            nextValParameter.ParameterName = ":nextval";
                             command.Parameters.Add(nextValParameter);
 
                             _store.Configuration.Logger.LogTrace(InsertCommand);
