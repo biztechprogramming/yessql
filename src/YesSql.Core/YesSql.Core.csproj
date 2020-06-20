@@ -4,6 +4,8 @@
         <VersionPrefix>2.0.0</VersionPrefix>
         <RootNamespace>YesSql</RootNamespace>
         <LangVersion>8.0</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>2.0.1-beta</Version>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Dapper.StrongName" Version="2.0.35" />
