@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "YesSql.Core": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

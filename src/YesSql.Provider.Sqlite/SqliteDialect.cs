@@ -67,18 +67,18 @@ namespace YesSql.Provider.Sqlite
             sqlBuilder.ClearTrail();
 
             // If offset is defined without limit, use -1 as limit is mandatory on Sqlite
-            if (offset != null && limit == null)
+            if (!string.IsNullOrWhiteSpace(offset) && string.IsNullOrWhiteSpace(limit))
             {
                 limit = "-1";
             }
 
-            if (limit != null)
+            if (!string.IsNullOrWhiteSpace(limit))
             {
                 sqlBuilder.Trail(" LIMIT ");
                 sqlBuilder.Trail(limit);
             }
 
-            if (offset != null)
+            if (!string.IsNullOrWhiteSpace(offset))
             {
                 sqlBuilder.Trail(" OFFSET ");
                 sqlBuilder.Trail(offset);

@@ -104,17 +104,17 @@ namespace YesSql.Provider.PostgreSql
         {
             sqlBuilder.Trail(" limit ");
 
-            if (offset != null && limit == null)
+            if (!string.IsNullOrWhiteSpace(offset) && string.IsNullOrWhiteSpace(limit))
             {
                 sqlBuilder.Trail(" all");
             }
 
-            if (limit != null)
+            if (!string.IsNullOrWhiteSpace(limit))
             {
                 sqlBuilder.Trail(limit);
             }
 
-            if (offset != null)
+            if (!string.IsNullOrWhiteSpace(offset))
             {
                 sqlBuilder.Trail(" offset ");
                 sqlBuilder.Trail(offset);
